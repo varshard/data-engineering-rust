@@ -25,13 +25,14 @@ impl PageRank {
                 }
             }
 
-            // for rank in &mut new_rank {
-            //     *rank = *rank * self.damping + (1. - self.damping) / (size as f64);
-            // }
+            for rank in &mut new_ranks {
+                *rank = *rank * self.damping + (1.0 - self.damping) / (size as f64);
+            }
+            ranks = new_ranks;
 
-            ranks = new_ranks.into_iter().map(|rank| {
-                rank * self.damping + (1.0 - self.damping) / (size as f64)
-            }).collect();
+            // ranks = new_ranks.into_iter().map(|rank| {
+            //     rank * self.damping + (1.0 - self.damping) / (size as f64)
+            // }).collect();
         }
 
         ranks
@@ -51,7 +52,11 @@ fn main() {
     let pagerank = PageRank::new(0.85, 100);
     let ranks = pagerank.rank(&graph);
 
+    let mut sum = 0.0;
     for (i, rank) in ranks.iter().enumerate() {
+        sum += rank;
         println!("pagerank of {} is {}", sites[i], rank);
     }
+
+    println!("total: {}", sum);
 }

@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace]
-members = ["fighter"]
+members = ["fighter", "pagerank", "community-detection"]
 
 [[bin]]
 name = "fighter"
@@ -16,4 +16,6 @@ path = "fighter/src/main.rs"
 name = "pagerank"
 path = "pagerank/src/main.rs"
 
-[dependencies]
+[[bin]]
+name = "community-detection"
+path = "community-detection/src/main.rs"
